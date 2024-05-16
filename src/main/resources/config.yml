@@ -1,0 +1,71 @@
+# Includes support for MiniMessage message-tags for customizability
+# Documentation can be found at https://docs.advntr.dev/minimessage/format.html
+# Non-strict mode applies
+
+# Note: If no custom configuration is set for a dolphin type, then a white item-name with text "<Dolphin-Type> Dolphin" and no item lore will be applied to the item by default. The default actionbar text is the first letter of the dolphin-type's name in white text
+# If multiple dolphins are active, the actionbar text is displayed with the "actionbar-separator" in between each text indicator (as they are set in the "active-actionbar-text" parameter).
+
+dolphin-cap: 2
+command-bypass-cap: true
+
+actionbar-separator: ""
+
+dolphin-item-data:
+  dark:
+    item-name: "<gray>Dark Dolphin"
+    item-lore:
+      - ""
+      - "Effect:"
+      - "<gray>Resistance 1"
+    active-actionbar-text: "\uE000" # \uE000
+    custom-model-data: 1000
+  flame:
+    item-name: "<gold>Flame Dolphin"
+    item-lore:
+      - ""
+      - "Effect:"
+      - "<gold>Fire Resistance"
+    active-actionbar-text: "\uE001" # \uE001
+    custom-model-data: 1001
+  healthy:
+    item-name: "<green>Healthy Dolphin"
+    item-lore:
+      - ""
+      - "Effect:"
+      - "<green>+3 Hearts"
+    active-actionbar-text: "\uE002" # \uE002
+    custom-model-data: 1002
+  power:
+    item-name: "<red>Power Dolphin"
+    item-lore:
+      - ""
+      - "Effect:"
+      - "<red>Strength"
+    active-actionbar-text: "\uE003" # \uE003
+    custom-model-data: 1003
+  speed:
+    item-name: "<aqua>Speed Dolphin"
+    item-lore:
+      - ""
+      - "Effects:"
+      - "<aqua>Speed"
+      - "<blue>Dolphin's Grace"
+    active-actionbar-text: "\uE004" # \uE004
+    custom-model-data: 1004
+  dolphin-slot-reroll:
+    item-name: "Dolphin Slot Reroll"
+    item-lore:
+      - "<gray>Will re-roll your dolphin slots amount"
+      - "<gray>to be a random number between 1 to 5"
+    custom-model-data: 1005
+    reroll-range-min: 1
+    reroll-range-max: 5
+    # Available Placeholder: <new-slots>
+    reroll-title: "<red>Slot Reroll"
+    # Available Placeholder: <new-slots>
+    reroll-subtitle: "<green>You now have <new-slots> Dolphin slot(s)"
+    title-fade-in: 500 # in milliseconds
+    title-stay: 2000 # in milliseconds
+    title-fade-out: 500 # in milliseconds
+
+config-version: 3 # Do not modify this

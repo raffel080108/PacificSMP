@@ -1,0 +1,20 @@
+name: PacificSMP
+version: '${project.version}'
+main: raffel080108.pacificsmp.PacificSMP
+api-version: '1.20'
+
+permissions:
+  pacificsmp.*:
+    description: Access to all PacificSMP plugin's commands
+    default: op
+    children:
+      pacificsmp.reload:
+        default: op
+      pacificsmp.givedolphin:
+        default: op
+      pacificsmp.cleardolphin:
+        default: op
+      pacificsmp.givedolphinitem:
+        default: op
+      pacificsmp.dolphinwithdraw:
+        default: op
