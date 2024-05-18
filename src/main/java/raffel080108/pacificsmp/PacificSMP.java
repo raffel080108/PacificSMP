@@ -65,7 +65,7 @@ public final class PacificSMP extends JavaPlugin {
         dataFile = new File(getDataFolder(), "data.yml");
         if (!dataFile.exists()) {
             dataFile.getParentFile().mkdirs();
-            saveResource("src/data.yml", false);
+            saveResource("data.yml", false);
         }
 
         dataConfig = YamlConfiguration.loadConfiguration(dataFile);
@@ -206,7 +206,7 @@ public final class PacificSMP extends JavaPlugin {
 
         if (!dataFile.exists()) {
             dataFile.getParentFile().mkdirs();
-            saveResource("src/data.yml", false);
+            saveResource("data.yml", false);
         }
 
         try {
