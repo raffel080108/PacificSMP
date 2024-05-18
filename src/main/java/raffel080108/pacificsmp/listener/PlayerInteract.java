@@ -79,8 +79,9 @@ public class PlayerInteract implements Listener {
 
             int playerDolphinCap = dataHandler.getPlayerDolphinCap(player);
             int newCap = playerDolphinCap;
+            Random random = new Random(System.nanoTime());
             while (newCap == playerDolphinCap)
-                newCap = new Random(System.nanoTime()).nextInt(dataHandler.getRerollRangeMin(), dataHandler.getRerollRangeMax() + 1);
+                newCap = random.nextInt(dataHandler.getRerollRangeMin(), dataHandler.getRerollRangeMax() + 1);
 
             dataHandler.setPlayerDolphinCap(player, newCap);
 

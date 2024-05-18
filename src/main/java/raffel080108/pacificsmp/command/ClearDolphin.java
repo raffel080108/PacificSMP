@@ -22,8 +22,6 @@ public class ClearDolphin {
     @CommandPermission("pacificsmp.cleardolphin")
     public void clearDolphinCommand(BukkitCommandActor sender, @Named("player") @Default("self") Player player) {
         DataHandler dataHandler = DataHandler.getInstance();
-        for (DolphinType dolphinType : dataHandler.getPlayerActiveDolphins(player))
-            DolphinEffects.triggerDisable(player, dolphinType);
 
         List<DolphinType> activeDolphins = dataHandler.getPlayerActiveDolphins(player);
         String playerName = player.getName();
@@ -32,6 +30,9 @@ public class ClearDolphin {
             sender.reply(MiniMessage.miniMessage().deserialize("<red>" + playerName + " has no active dolphins"));
             return;
         }
+
+        for (DolphinType dolphinType : activeDolphins)
+            DolphinEffects.triggerDisable(player, dolphinType);
 
         activeDolphins.clear();
 

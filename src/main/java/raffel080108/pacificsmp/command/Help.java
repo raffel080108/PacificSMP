@@ -16,7 +16,7 @@ public class Help {
     public void helpCommand(BukkitCommandActor sender) {
         StringBuilder helpMessage = new StringBuilder("----------\nList of commands:\n/pacificsmp help");
 
-        List<String> commandNames = List.of("pacificsmp reload", "givedolphin", "givedolphinitem", "cleardolphin");
+        List<String> commandNames = List.of("pacificsmp reload", "givedolphin", "givedolphinitem", "cleardolphin", "dolphinwithdraw", "setdolphinslots");
         for (String commandName : commandNames) {
             boolean hasPermission = true;
             if (sender.isPlayer())

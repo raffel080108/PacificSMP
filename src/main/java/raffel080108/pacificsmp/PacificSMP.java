@@ -35,6 +35,7 @@ import raffel080108.pacificsmp.listener.PlayerJoin;
 import raffel080108.pacificsmp.listener.PlayerRespawn;
 import raffel080108.pacificsmp.util.ActionbarRunnable;
 import raffel080108.pacificsmp.util.Util;
+import revxrsal.commands.autocomplete.AutoCompleter;
 import revxrsal.commands.bukkit.BukkitCommandHandler;
 
 import java.io.File;
@@ -63,10 +64,7 @@ public final class PacificSMP extends JavaPlugin {
 
         log.info("Loading data...");
         dataFile = new File(getDataFolder(), "data.yml");
-        if (!dataFile.exists()) {
-            dataFile.getParentFile().mkdirs();
-            saveResource("data.yml", false);
-        }
+        saveDataFile();
 
         dataConfig = YamlConfiguration.loadConfiguration(dataFile);
 
@@ -89,7 +87,8 @@ public final class PacificSMP extends JavaPlugin {
         commandHandler.register(new Reload());
         commandHandler.register(new Help());
 
-        commandHandler.getAutoCompleter().registerSuggestion("dolphinNames", (arg, sender, command) -> {
+        AutoCompleter autoCompleter = commandHandler.getAutoCompleter();
+        autoCompleter.registerSuggestion("dolphinNames", (arg, sender, command) -> {
             List<String> suggestions = new ArrayList<>();
             for (DolphinType dolphinType : DolphinType.values())
                 suggestions.add(dolphinType.name().toLowerCase());
@@ -98,7 +97,7 @@ public final class PacificSMP extends JavaPlugin {
 
             return suggestions;
         });
-        commandHandler.getAutoCompleter().registerSuggestion("dolphinTypes", (arg, sender, command) -> {
+        autoCompleter.registerSuggestion("dolphinTypes", (arg, sender, command) -> {
             List<String> suggestions = new ArrayList<>();
             for (DolphinType dolphinType : DolphinType.values())
                 suggestions.add(dolphinType.name().toLowerCase());
@@ -204,10 +203,7 @@ public final class PacificSMP extends JavaPlugin {
         dataConfig.set("playerActiveDolphins", gson.toJson(dataHandler.getPlayerActiveDolphins()));
         dataConfig.set("playerDolphinCaps", gson.toJson(dataHandler.getPlayerDolphinCaps()));
 
-        if (!dataFile.exists()) {
-            dataFile.getParentFile().mkdirs();
-            saveResource("data.yml", false);
-        }
+        saveDataFile();
 
         try {
             dataConfig.save(dataFile);
@@ -239,6 +235,16 @@ public final class PacificSMP extends JavaPlugin {
                 "dolphin-item-data.dolphin-slot-reroll.title-stay",
                 "dolphin-item-data.dolphin-slot-reroll.title-fade-out"
         ));
+    }
+
+    private void saveDataFile() {
+        if (dataFile == null)
+            return;
+
+        if (!dataFile.exists()) {
+            dataFile.getParentFile().mkdirs();
+            saveResource("data.yml", false);
+        }
     }
 
     public void loadConfiguration() {
@@ -315,9 +321,9 @@ public final class PacificSMP extends JavaPlugin {
                 dataHandler.setRerollTitle(rerollItemConfig.getString("reroll-title", ""));
                 dataHandler.setRerollSubtitle(rerollItemConfig.getString("reroll-subtitle", ""));
                 dataHandler.setRerollTitleTimes(Title.Times.times(
-                        Duration.ofMillis(rerollItemConfig.getInt("title-fade-in", 500)),
-                        Duration.ofMillis(rerollItemConfig.getInt("title-stay", 2000)),
-                        Duration.ofMillis(rerollItemConfig.getInt("title-fade-out", 500))));
+                        Duration.ofMillis(rerollItemConfig.getLong("title-fade-in", 500)),
+                        Duration.ofMillis(rerollItemConfig.getLong("title-stay", 2000)),
+                        Duration.ofMillis(rerollItemConfig.getLong("title-fade-out", 500))));
             } else log.warning("Missing or invalid configuration for slot-reroll item");
         } else log.warning("Invalid or missing configuration for: dolphin-item-data");
 
